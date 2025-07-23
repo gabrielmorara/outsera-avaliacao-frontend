@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f6f7fb;
+}
+
+.header {
+  width: 100%;
+  background: #23272b;
+  color: #fff;
+  font-size: 24px;
+  padding: 18px 32px;
+  font-weight: 500;
+}

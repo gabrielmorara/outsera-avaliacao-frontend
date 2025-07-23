@@ -1,0 +1,115 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  background: #f6f7fb;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 220px;
+  background: #f5f6fa;
+  border-right: 1px solid #e0e0e0;
+  padding-top: 56px;
+  overflow-y: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: #1976d2;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 8px 0 8px 24px;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.main {
+  margin-left: 220px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: 40px 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px #0001;
+  padding: 20px 28px 28px 28px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-size: 20px;
+  margin: 0 0 18px 0;
+  font-weight: 600;
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.card th,
+.card td {
+  border: 1px solid #ececec;
+  padding: 8px 12px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.card th {
+  background: #f5f6fa;
+  font-weight: 600;
+}
+
+.card input[type="number"],
+.card input[type="text"] {
+  padding: 7px 10px;
+  margin-right: 7px;
+  border: 1px solid #cfcfcf;
+  border-radius: 3px;
+  font-size: 15px;
+  width: 130px;
+}
+
+.card button {
+  background: #1976d2;
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.card button:hover {
+  background: #1565c0;
+}
+
+.interval-section {
+  margin-bottom: 12px;
+}
+
+.interval-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 14px 0 4px 0;
+}

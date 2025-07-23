@@ -1,0 +1,58 @@
+<div class="movies-card">
+  <h2>List movies</h2>
+  <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom:8px;">
+    <label>
+      Items per page:
+      <select [(ngModel)]="size" (ngModelChange)="onSizeChange()" style="margin-left:4px;">
+        <option *ngFor="let opt of sizeOptions" [ngValue]="opt">{{opt}}</option>
+      </select>
+    </label>
+    <span>Total items: {{totalItems}}</span>
+  </div>
+  <table class="movies-table">
+    <thead>
+      <tr>
+        <th style="width:8%">ID</th>
+        <th style="width:18%">
+          <input 
+            type="number" 
+            [(ngModel)]="year" 
+            (ngModelChange)="onFilterChange()" 
+            placeholder="Filter by year"
+            style="width:90%; padding:4px 7px;"
+          />
+        </th>
+        <th style="width:50%">Title</th>
+        <th style="width:18%">
+          <select [(ngModel)]="winner" (ngModelChange)="onFilterChange()" style="width:80%; padding:4px 7px;">
+            <option [ngValue]="undefined">Yes/No</option>
+            <option [ngValue]="true">Yes</option>
+            <option [ngValue]="false">No</option>
+          </select>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of movies">
+        <td>{{m.id}}</td>
+        <td>{{m.year}}</td>
+        <td>{{m.title}}</td>
+        <td>{{m.winner ? 'Yes' : 'No'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="goToPage(0)" [disabled]="page === 0">«</button>
+    <button (click)="goToPage(page-1)" [disabled]="page === 0">‹</button>
+    <button 
+      *ngFor="let p of pageNumbers"
+      [class.active]="p === page"
+      (click)="goToPage(p)"
+    >
+      {{p + 1}}
+    </button>
+    <button (click)="goToPage(page+1)" [disabled]="page === totalPages-1">›</button>
+    <button (click)="goToPage(totalPages-1)" [disabled]="page === totalPages-1">»</button>
+  </div>
+</div>

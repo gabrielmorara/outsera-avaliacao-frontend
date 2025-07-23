@@ -1,0 +1,94 @@
+<div class="dashboard-container">
+  <div class="main">
+    <div class="content">
+      <div class="grid">
+        <div class="card">
+          <h3>List years with multiple winners</h3>
+          <table>
+            <tr>
+              <th>Year</th>
+              <th>Win Count</th>
+            </tr>
+            <tr *ngFor="let y of yearsWithMultipleWinners">
+              <td>{{y.year}}</td>
+              <td>{{y.winnerCount}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Top 3 studios with winners</h3>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Win Count</th>
+            </tr>
+            <tr *ngFor="let s of topStudios">
+              <td>{{s.name}}</td>
+              <td>{{s.winCount}}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card" style="grid-column: span 1 / span 1;">
+          <h3>Producers with longest and shortest interval between wins</h3>
+          <div class="interval-section">
+            <div class="interval-title">Maximum</div>
+            <table>
+              <tr>
+                <th>Producer</th>
+                <th>Interval</th>
+                <th>Previous Year</th>
+                <th>Following Year</th>
+              </tr>
+              <tr *ngIf="maxInterval">
+                <td>{{maxInterval.producer}}</td>
+                <td>{{maxInterval.interval}}</td>
+                <td>{{maxInterval.previousWin}}</td>
+                <td>{{maxInterval.followingWin}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="interval-section">
+            <div class="interval-title">Minimum</div>
+            <table>
+              <tr>
+                <th>Producer</th>
+                <th>Interval</th>
+                <th>Previous Year</th>
+                <th>Following Year</th>
+              </tr>
+              <tr *ngIf="minInterval">
+                <td>{{minInterval.producer}}</td>
+                <td>{{minInterval.interval}}</td>
+                <td>{{minInterval.previousWin}}</td>
+                <td>{{minInterval.followingWin}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>List movie winners by year</h3>
+          <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <input #yearInput type="number" placeholder="Search by year">
+            <button (click)="fetchWinners(yearInput.value)">
+              <span class="material-icons" style="font-size:18px; vertical-align: middle;">search</span>
+            </button>
+          </div>
+          <table>
+            <tr>
+              <th>Id</th>
+              <th>Year</th>
+              <th>Title</th>
+            </tr>
+            <tr *ngFor="let w of winnersByYear">
+              <td>{{w.id}}</td>
+              <td>{{w.year}}</td>
+              <td>{{w.title}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
