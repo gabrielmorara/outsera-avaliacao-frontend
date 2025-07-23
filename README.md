@@ -1,23 +1,43 @@
 # Outsera Avaliação Frontend
 
 Este projeto foi desenvolvido como parte de uma avaliação técnica.  
-O objetivo é desenvovler uma aplicação Angular que consome a API pública do Golden Raspberry Awards.
+O objetivo é desenvolver uma aplicação Angular que consome a API pública do Golden Raspberry Awards.
 
 ## 🏗️ Tecnologias Utilizadas
 
-- **Angular 17** e **Angular CLI** para construção da aplicação web
+- **Angular** para construção da aplicação web
 - **TypeScript** para a escrita do código fonte
-- **RxJS** e **Zone.js** para programação reativa e controle de execução
-- **Jest** com **jest-preset-angular** para os testes unitários
+- **Jest** para os testes unitários
 
 ## 📂 Estrutura do Projeto
-
-- `package.json` e `angular.json` – Configurações do projeto
-- `src/` – Código fonte da aplicação Angular
-  - `app/` – Componentes e serviço do dashboard e da lista de filmes
-  - `index.html`, `main.ts`, `styles.css`, `polyfills.ts` – Arquivos de inicialização da aplicação
-- `tests/` – Casos de teste escritos com Jest
-- `fetch-movies.ts` – Exemplo simples de requisição à API
+```bash
+├── src/
+│   ├── app/                 # Componentes e serviços principais da aplicação
+│   ├── assets/              # Arquivos estáticos (imagens, ícones, etc)
+│   ├── environments/        # Configurações de ambiente (dev, prod, etc)
+│   ├── favico.ico           # Ícone da aplicação
+│   ├── index.html           # HTML principal (entrypoint)
+│   ├── main.ts              # Bootstrap da aplicação Angular
+│   ├── polyfills.ts         # Polyfills para compatibilidade de browsers
+│   └── styles.css           # Estilos globais da aplicação
+│
+├── tests/
+│   └── app/
+│       ├── dashboard/
+│       │   └── dashboard.component.spec.ts      # Testes unitários do dashboard
+│       └── movies/
+│           ├── movies.component.spec.ts         # Testes unitários da listagem de filmes
+│           └── movie.service.spec.ts            # Testes unitários do serviço de filmes
+│
+├── .eslintrc.json          # Configuração de lint
+├── .gitignore              # Arquivos/pastas ignorados pelo Git
+├── .prettierrc             # Configuração de formatação
+├── angular.json            # Configuração do Angular CLI
+├── jest.config.js          # Configuração do Jest
+├── jest.setup.ts           # Setup global do Jest
+├── package.json            # Dependências e scripts do projeto
+└── README.md               # Documentação do projeto
+```
 
 ## ⚙️ Como rodar o projeto
 
