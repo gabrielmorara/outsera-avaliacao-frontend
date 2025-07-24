@@ -88,6 +88,11 @@
               <td>{{w.title}}</td>
             </tr>
           </table>
+          <!-- Mensagem caso nenhum registro seja encontrado -->
+          <div *ngIf="winnersByYear && winnersByYear.length === 0 && lastSearchedYear"
+            style="text-align:center; margin-top:8px; color:#b0b0b0;">
+            No records found
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 {
-  "name": "golden-raspberry-frontend",
+  "name": "outsera-avaliacao-frontend",
   "version": "1.0.0",
   "scripts": {
     "start": "ng serve",
