@@ -1,26 +1,31 @@
-/// <reference types="jest" />
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { DashboardComponent } from '../../../src/app/dashboard/dashboard.component';
-import { MovieService, ProducerInterval, StudioWins, YearWins, Movie } from '../../../src/app/movie.service';
+import {
+  MovieService,
+  ProducerInterval,
+  StudioWins,
+  YearWins,
+  Movie,
+} from '../../../src/app/movie.service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let serviceSpy: jest.Mocked<MovieService>;
+  let serviceSpy: jasmine.SpyObj<MovieService>;
 
   beforeEach(async () => {
- serviceSpy = {
-      getMovies: jest.fn(),
-      getYearsWithMultipleWinners: jest.fn(),
-      getTopStudios: jest.fn(),
-      getProducerIntervals: jest.fn(),
-      getWinnersByYear: jest.fn()
-    } as unknown as jest.Mocked<MovieService>;
+    serviceSpy = jasmine.createSpyObj('MovieService', [
+      'getMovies',
+      'getYearsWithMultipleWinners',
+      'getTopStudios',
+      'getProducerIntervals',
+      'getWinnersByYear',
+    ]);
 
     await TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
-      providers: [{ provide: MovieService, useValue: serviceSpy }]
+      imports: [DashboardComponent],
+      providers: [{ provide: MovieService, useValue: serviceSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
@@ -33,16 +38,20 @@ describe('DashboardComponent', () => {
       { name: 'A', winCount: 4 },
       { name: 'B', winCount: 3 },
       { name: 'C', winCount: 2 },
-      { name: 'D', winCount: 1 }
+      { name: 'D', winCount: 1 },
     ];
     const intervals = {
-      min: [{ producer: 'X', interval: 1, previousWin: 1990, followingWin: 1991 }],
-      max: [{ producer: 'Y', interval: 10, previousWin: 1980, followingWin: 1990 }]
+      min: [
+        { producer: 'X', interval: 1, previousWin: 1990, followingWin: 1991 },
+      ],
+      max: [
+        { producer: 'Y', interval: 10, previousWin: 1980, followingWin: 1990 },
+      ],
     };
 
-    serviceSpy.getYearsWithMultipleWinners.mockReturnValue(of(years));
-    serviceSpy.getTopStudios.mockReturnValue(of(studios));
-    serviceSpy.getProducerIntervals.mockReturnValue(of(intervals));
+    serviceSpy.getYearsWithMultipleWinners.and.returnValue(of(years));
+    serviceSpy.getTopStudios.and.returnValue(of(studios));
+    serviceSpy.getProducerIntervals.and.returnValue(of(intervals));
 
     fixture.detectChanges();
 
@@ -54,9 +63,16 @@ describe('DashboardComponent', () => {
 
   it('deve buscar vencedores por ano válido', () => {
     const winners: Movie[] = [
-      { id: 1, year: 2000, title: 't', studios: [], producers: [], winner: true }
+      {
+        id: 1,
+        year: 2000,
+        title: 't',
+        studios: [],
+        producers: [],
+        winner: true,
+      },
     ];
-    serviceSpy.getWinnersByYear.mockReturnValue(of(winners));
+    serviceSpy.getWinnersByYear.and.returnValue(of(winners));
 
     component.fetchWinners('2000');
 

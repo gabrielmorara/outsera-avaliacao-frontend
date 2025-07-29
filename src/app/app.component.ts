@@ -1,7 +1,11 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <nav>
       <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>

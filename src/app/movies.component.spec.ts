@@ -1,25 +1,20 @@
-/// <reference types="jest" />
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { MoviesComponent } from '../../../src/app/movies/movies.component';
-import { MovieService, Movie } from '../../../src/app/movie.service';
-
+import { MoviesComponent } from './movies/movies.component';
+import { MovieService, Movie } from './movie.service';
 
 describe('MoviesComponent', () => {
   let component: MoviesComponent;
   let fixture: ComponentFixture<MoviesComponent>;
-  let serviceSpy: jest.Mocked<MovieService>;
+  let serviceSpy: jasmine.SpyObj<MovieService>;
 
   beforeEach(async () => {
-    serviceSpy = {
-      getMovies: jest.fn()
-    } as unknown as jest.Mocked<MovieService>;
+    serviceSpy = jasmine.createSpyObj('MovieService', ['getMovies']);
 
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [MoviesComponent],
-      providers: [{ provide: MovieService, useValue: serviceSpy }]
+      imports: [FormsModule, MoviesComponent],
+      providers: [{ provide: MovieService, useValue: serviceSpy }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MoviesComponent);
@@ -27,8 +22,20 @@ describe('MoviesComponent', () => {
   });
 
   it('deve carregar filmes ao iniciar', () => {
-    const mock = { content: [{ id: 1, year: 2000, title: 't', studios: [], producers: [], winner: true } as Movie], totalPages: 1 };
-    serviceSpy.getMovies.mockReturnValue(of(mock));
+    const mock = {
+      content: [
+        {
+          id: 1,
+          year: 2000,
+          title: 't',
+          studios: [],
+          producers: [],
+          winner: true,
+        } as Movie,
+      ],
+      totalPages: 1,
+    };
+    serviceSpy.getMovies.and.returnValue(of(mock));
 
     fixture.detectChanges();
 
@@ -38,7 +45,7 @@ describe('MoviesComponent', () => {
   });
 
   it('deve atualizar filtros', () => {
-    serviceSpy.getMovies.mockReturnValue(of({ content: [], totalPages: 1 }));
+    serviceSpy.getMovies.and.returnValue(of({ content: [], totalPages: 1 }));
     component.page = 2;
     component.onFilterChange();
     expect(component.page).toBe(0);
@@ -46,14 +53,14 @@ describe('MoviesComponent', () => {
   });
 
   it('deve mudar de página quando válida', () => {
-    serviceSpy.getMovies.mockReturnValue(of({ content: [], totalPages: 3 }));
+    serviceSpy.getMovies.and.returnValue(of({ content: [], totalPages: 3 }));
     component.totalPages = 3;
     component.goToPage(2);
     expect(component.page).toBe(2);
   });
 
   it('não deve mudar para página inválida', () => {
-    (serviceSpy.getMovies as jest.Mock).mockClear();
+    serviceSpy.getMovies.calls.reset();
     component.totalPages = 2;
     component.goToPage(3);
     expect(component.page).toBe(0);

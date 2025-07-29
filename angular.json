@@ -1,8 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "defaultProject": "outsera-avaliacao-frontend",
   "projects": {
-    "golden-raspberry-frontend": {
+    "outsera-avaliacao-frontend": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -11,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/golden-raspberry-frontend",
+            "outputPath": "dist/outsera-avaliacao-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,19 +25,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "golden-raspberry-frontend:build"
+            "buildTarget": "outsera-avaliacao-frontend:build"
           }
         },
         "test": {
-          "builder": "@angular-builders/jest:run",
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "configPath": "jest.config.js"
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
+            "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "golden-raspberry-frontend",
   "cli": {
     "analytics": "f300e99e-54c4-4153-9870-f93cc762e67a"
   }
