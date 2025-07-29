@@ -47,5 +47,6 @@ O objetivo é desenvolver uma aplicação Angular que consome a API pública do 
 Após instalar as dependências, execute:
 
 ```bash
+ng generate config karma
 npm test
 ```
