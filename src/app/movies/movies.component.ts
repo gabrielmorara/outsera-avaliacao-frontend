@@ -28,15 +28,20 @@ export class MoviesComponent implements OnInit {
   }
 
   load() {
-    this.movieService.getMovies(this.page, this.size, this.year, this.winner).subscribe(res => {
-      this.movies = res.content;
-      this.totalPages = res.totalPages;
-      this.totalItems = res.totalElements ?? res.totalItems ?? 0;
-      this.updatePageNumbers();
-    });
+    this.movieService
+      .getMovies(this.page, this.size, this.year, this.winner)
+      .subscribe((res) => {
+        this.movies = res.content;
+        this.totalPages = res.totalPages;
+        this.totalItems = res.totalElements ?? res.totalItems ?? 0;
+        this.updatePageNumbers();
+      });
   }
 
   onFilterChange() {
+    if (this.year === null || isNaN(Number(this.year))) {
+      this.year = undefined;
+    }
     this.page = 0;
     this.load();
   }
